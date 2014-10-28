@@ -1,8 +1,9 @@
-from stackbrew/ubuntu:12.04
-maintainer Shipyard Project "http://shipyard-project.com"
+from ubuntu:14.04.1
+maintainer Shipyard Project "http://edustack.org"
 run apt-get update
-run apt-get install -y curl
-run curl https://get.docker.io/builds/Linux/x86_64/docker-latest -o /usr/local/bin/docker
-run chmod +x /usr/local/bin/docker
+run apt-get install -y docker.io
+run ln -sf /usr/bin/docker.io /usr/local/bin/docker
+run sed -i '$acomplete -F _docker docker' /etc/bash_completion.d/docker.io
+run source /etc/bash_completion.d/docker.io
 add run.sh /usr/local/bin/run
 entrypoint ["/usr/local/bin/run"]
